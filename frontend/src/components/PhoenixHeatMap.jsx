@@ -36,6 +36,18 @@ function FitMapToNeighborhoods({ neighborhoods }) {
 function PhoenixHeatMap({ neighborhoods, getRiskColor }) {
   const topNeighborhood = neighborhoods?.[0];
 
+  const popupTextStyle = {
+    margin: "7px 0",
+    color: "#1f2937",
+    fontSize: "13px",
+    lineHeight: 1.45,
+  };
+
+  const popupLabelStyle = {
+    color: "#111827",
+    fontWeight: "700",
+  };
+
   return (
     <section className="card">
       <h2>Phoenix Heat Priority Map</h2>
@@ -176,72 +188,146 @@ function PhoenixHeatMap({ neighborhoods, getRiskColor }) {
                 <Popup>
                   <div
                     style={{
-                      minWidth: "210px",
+                      minWidth: "220px",
+                      color: "#1f2937",
+                      background: "#ffffff",
+                      fontFamily: "Inter, Arial, sans-serif",
                     }}
                   >
                     {isTopPriority && (
-                      <p
+                      <div
                         style={{
-                          margin: "0 0 8px 0",
-                          fontSize: "11px",
-                          fontWeight: "700",
-                          color: "#ef4444",
-                          letterSpacing: "0.05em",
+                          display: "inline-block",
+                          marginBottom: "10px",
+                          padding: "5px 8px",
+                          borderRadius: "999px",
+                          background: "#fee2e2",
+                          color: "#dc2626",
+                          fontSize: "10px",
+                          fontWeight: "800",
+                          letterSpacing: "0.06em",
                         }}
                       >
                         TOP INTERVENTION PRIORITY
-                      </p>
+                      </div>
                     )}
 
-                    <strong
+                    <div
                       style={{
-                        fontSize: "16px",
+                        marginBottom: "10px",
                       }}
                     >
-                      #{index + 1} {neighborhood.name}
-                    </strong>
-
-                    <p style={{ margin: "7px 0" }}>
-                      ZIP: {neighborhood.zip}
-                    </p>
-
-                    <p style={{ margin: "7px 0" }}>
-                      <strong>Priority Score:</strong>{" "}
-                      {neighborhood.priorityScore}/100
-                    </p>
-
-                    <p style={{ margin: "7px 0" }}>
-                      <strong>Priority Level:</strong>{" "}
-                      {neighborhood.priorityLevel}
-                    </p>
-
-                    <p style={{ margin: "7px 0" }}>
-                      <strong>Heat Exposure:</strong>{" "}
-                      {neighborhood.exposureScore}/100
-                    </p>
-
-                    <p style={{ margin: "7px 0" }}>
-                      <strong>Poverty:</strong>{" "}
-                      {neighborhood.povertyPercent}%
-                    </p>
-
-                    <p style={{ margin: "7px 0" }}>
-                      <strong>Age 65+:</strong>{" "}
-                      {neighborhood.elderlyPercent}%
-                    </p>
-
-                    {isTopPriority && (
-                      <p
+                      <strong
                         style={{
-                          marginTop: "10px",
-                          paddingTop: "8px",
-                          borderTop: "1px solid #d1d5db",
+                          display: "block",
+                          color: "#111827",
+                          fontSize: "17px",
+                          lineHeight: 1.25,
+                        }}
+                      >
+                        #{index + 1} {neighborhood.name}
+                      </strong>
+
+                      <span
+                        style={{
+                          display: "block",
+                          marginTop: "3px",
+                          color: "#6b7280",
                           fontSize: "12px",
                         }}
                       >
-                        Recommended response: prioritize cooling access,
-                        hydration support, outreach, and welfare checks.
+                        ZIP {neighborhood.zip}
+                      </span>
+                    </div>
+
+                    <div
+                      style={{
+                        padding: "10px 12px",
+                        borderRadius: "10px",
+                        background: "#f8fafc",
+                        border: "1px solid #e5e7eb",
+                      }}
+                    >
+                      <p style={popupTextStyle}>
+                        <span style={popupLabelStyle}>
+                          Priority Score:
+                        </span>{" "}
+                        {neighborhood.priorityScore}/100
                       </p>
+
+                      <p style={popupTextStyle}>
+                        <span style={popupLabelStyle}>
+                          Priority Level:
+                        </span>{" "}
+                        <span
+                          style={{
+                            color: getRiskColor(
+                              neighborhood.priorityLevel
+                            ),
+                            fontWeight: "800",
+                          }}
+                        >
+                          {neighborhood.priorityLevel}
+                        </span>
+                      </p>
+
+                      <p style={popupTextStyle}>
+                        <span style={popupLabelStyle}>
+                          Heat Exposure:
+                        </span>{" "}
+                        {neighborhood.exposureScore}/100
+                      </p>
+
+                      <p style={popupTextStyle}>
+                        <span style={popupLabelStyle}>
+                          Poverty:
+                        </span>{" "}
+                        {neighborhood.povertyPercent}%
+                      </p>
+
+                      <p style={popupTextStyle}>
+                        <span style={popupLabelStyle}>
+                          Age 65+:
+                        </span>{" "}
+                        {neighborhood.elderlyPercent}%
+                      </p>
+                    </div>
+
+                    {isTopPriority && (
+                      <div
+                        style={{
+                          marginTop: "12px",
+                          padding: "10px 12px",
+                          borderRadius: "10px",
+                          background: "#fff7ed",
+                          border: "1px solid #fed7aa",
+                        }}
+                      >
+                        <div
+                          style={{
+                            marginBottom: "4px",
+                            color: "#9a3412",
+                            fontSize: "11px",
+                            fontWeight: "800",
+                            textTransform: "uppercase",
+                            letterSpacing: "0.04em",
+                          }}
+                        >
+                          Recommended Response
+                        </div>
+
+                        <p
+                          style={{
+                            margin: 0,
+                            color: "#7c2d12",
+                            fontSize: "12px",
+                            lineHeight: 1.5,
+                          }}
+                        >
+                          Prioritize cooling access, hydration support,
+                          community outreach, and welfare checks.
+                        </p>
+                      </div>
                     )}
                   </div>
                 </Popup>
