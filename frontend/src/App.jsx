@@ -3,6 +3,9 @@ import "./App.css";
 import { neighborhoods } from "./data/neighborhoods";
 import PhoenixHeatMap from "./components/PhoenixHeatMap";
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:5000";
+
 function App() {
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
@@ -31,7 +34,7 @@ function App() {
 
   const fetchCachedData = async () => {
     const response = await fetch(
-      "http://127.0.0.1:5000/api/triage"
+      `${API_BASE_URL}/api/triage`
     );
 
     if (!response.ok) {
@@ -60,7 +63,7 @@ function App() {
 
       try {
         const response = await fetchWithTimeout(
-          "http://127.0.0.1:5000/api/triage?refresh=1",
+          `${API_BASE_URL}/api/triage?refresh=1`,
           90000
         );
 
