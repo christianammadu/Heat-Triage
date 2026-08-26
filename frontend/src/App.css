@@ -185,7 +185,8 @@ textarea {
   margin: 0;
 
   font-size: clamp(42px, 6vw, 68px);
-  line-height: 1;
+  line-height: 1.12;
+  padding-bottom: 6px;
   letter-spacing: -0.045em;
 
   background: linear-gradient(
