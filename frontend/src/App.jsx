@@ -13,6 +13,7 @@ function App() {
   const [lastUpdated, setLastUpdated] = useState("");
   const [refreshMessage, setRefreshMessage] = useState("");
   const [refreshWarning, setRefreshWarning] = useState("");
+  const [showPriorityAlert, setShowPriorityAlert] = useState(true);
 
   const fetchWithTimeout = async (url, timeoutMs = 90000) => {
     const controller = new AbortController();
@@ -198,6 +199,10 @@ function App() {
 
   const topPriorityNeighborhood = rankedNeighborhoods[0];
 
+  const shouldShowPriorityAlert =
+    topPriorityNeighborhood &&
+    ["HIGH", "EXTREME"].includes(topPriorityNeighborhood.priorityLevel);
+
   const tableHeaderStyle = {
     textAlign: "left",
     padding: "12px",
@@ -278,6 +283,46 @@ function App() {
       </header>
 
       <main className="dashboard">
+        {shouldShowPriorityAlert && showPriorityAlert && (
+          <section className="urgent-alert" role="alert">
+            <div className="urgent-alert-icon" aria-hidden="true">
+              !
+            </div>
+
+            <div className="urgent-alert-content">
+              <p className="urgent-alert-eyebrow">
+                {topPriorityNeighborhood.priorityLevel === "EXTREME"
+                  ? "URGENT INTERVENTION ALERT"
+                  : "HIGH PRIORITY INTERVENTION ALERT"}
+              </p>
+
+              <h2>
+                {topPriorityNeighborhood.name} ({topPriorityNeighborhood.zip})
+              </h2>
+
+              <p>
+                This neighborhood currently has the highest intervention
+                priority in the prototype with a score of{" "}
+                <strong>{topPriorityNeighborhood.priorityScore}/100</strong>.
+              </p>
+
+              <p className="urgent-alert-action">
+                Recommended response: prioritize cooling-center access,
+                hydration support, community outreach, welfare checks, and
+                heat-safety messaging.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              className="urgent-alert-close"
+              onClick={() => setShowPriorityAlert(false)}
+              aria-label="Dismiss intervention alert"
+            >
+              ×
+            </button>
+          </section>
+        )}
         {error && (
           <section className="card">
             <h2>Connection Error</h2>
@@ -505,6 +550,77 @@ function App() {
                   {data.environment_activity_id}
                 </p>
               </div>
+            </section>
+
+            <section className="card ranked-risk-card">
+              <div className="ranked-risk-heading">
+                <div>
+                  <p className="ranked-risk-eyebrow">Neighborhood Priority</p>
+                  <h2>Ranked Risk View</h2>
+                  <p>
+                    A quick view of which Phoenix neighborhoods currently rank
+                    highest for intervention in this prototype.
+                  </p>
+                </div>
+
+                {topPriorityNeighborhood && (
+                  <div className="ranked-risk-summary">
+                    <span>Top Priority</span>
+                    <strong>{topPriorityNeighborhood.name}</strong>
+                    <small>
+                      {topPriorityNeighborhood.priorityScore}/100 ·{" "}
+                      {topPriorityNeighborhood.priorityLevel}
+                    </small>
+                  </div>
+                )}
+              </div>
+
+              <div className="ranked-risk-list">
+                {rankedNeighborhoods.map((neighborhood, index) => (
+                  <div className="ranked-risk-row" key={neighborhood.id}>
+                    <div className="ranked-risk-rank">#{index + 1}</div>
+
+                    <div className="ranked-risk-neighborhood">
+                      <strong>{neighborhood.name}</strong>
+                      <span>ZIP {neighborhood.zip}</span>
+                    </div>
+
+                    <div className="ranked-risk-bar-wrap">
+                      <div className="ranked-risk-bar-track">
+                        <div
+                          className="ranked-risk-bar-fill"
+                          style={{
+                            width: `${neighborhood.priorityScore}%`,
+                            background: getRiskColor(
+                              neighborhood.priorityLevel
+                            ),
+                          }}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="ranked-risk-score">
+                      <strong>{neighborhood.priorityScore}</strong>
+                      <span>/100</span>
+                    </div>
+
+                    <span
+                      className="ranked-risk-level"
+                      style={{
+                        background: getRiskColor(neighborhood.priorityLevel),
+                      }}
+                    >
+                      {neighborhood.priorityLevel}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <p className="ranked-risk-note">
+                Ranking uses prototype vulnerability inputs combined with local
+                heat exposure. Demographic values are not verified Census
+                statistics.
+              </p>
             </section>
 
             <PhoenixHeatMap

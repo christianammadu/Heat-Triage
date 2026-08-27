@@ -636,6 +636,291 @@ a {
   color: var(--cool);
 }
 
+
+/* -------------------------------------------------------
+   Intervention alert
+------------------------------------------------------- */
+
+.urgent-alert {
+  grid-column: 1 / -1;
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 16px;
+  padding: 22px 24px;
+  border: 1px solid rgba(249, 115, 22, 0.55);
+  border-radius: 20px;
+  background:
+    radial-gradient(
+      circle at 0% 0%,
+      rgba(239, 68, 68, 0.22),
+      transparent 36%
+    ),
+    linear-gradient(
+      135deg,
+      rgba(127, 29, 29, 0.38),
+      rgba(124, 45, 18, 0.28) 52%,
+      rgba(15, 23, 42, 0.92)
+    );
+  box-shadow:
+    0 18px 48px rgba(239, 68, 68, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.urgent-alert-icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ef4444, #f97316);
+  color: #ffffff;
+  font-size: 26px;
+  font-weight: 900;
+  box-shadow: 0 10px 28px rgba(239, 68, 68, 0.28);
+}
+
+.urgent-alert-content {
+  min-width: 0;
+}
+
+.urgent-alert-eyebrow {
+  margin: 0 0 5px !important;
+  color: #fdba74 !important;
+  font-size: 11px !important;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.urgent-alert h2 {
+  margin: 0 0 8px;
+  color: #ffffff;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+}
+
+.urgent-alert p {
+  margin: 5px 0;
+  color: #e2e8f0;
+  line-height: 1.55;
+}
+
+.urgent-alert-action {
+  color: #fed7aa !important;
+  font-weight: 700;
+}
+
+.urgent-alert-close {
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.45);
+  color: #f8fafc;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+
+.urgent-alert-close:hover {
+  background: rgba(239, 68, 68, 0.28);
+  transform: scale(1.04);
+}
+
+/* -------------------------------------------------------
+   Ranked risk view
+------------------------------------------------------- */
+
+.ranked-risk-card {
+  grid-column: 1 / -1;
+}
+
+.ranked-risk-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 22px;
+}
+
+.ranked-risk-heading h2 {
+  margin-bottom: 8px;
+}
+
+.ranked-risk-heading p {
+  margin-bottom: 0;
+}
+
+.ranked-risk-eyebrow {
+  margin: 0 0 7px !important;
+  color: #7dd3fc !important;
+  font-size: 11px !important;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.ranked-risk-summary {
+  flex: 0 0 auto;
+  min-width: 170px;
+  padding: 13px 15px;
+  border: 1px solid rgba(245, 158, 11, 0.24);
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.42);
+}
+
+.ranked-risk-summary span,
+.ranked-risk-summary small {
+  display: block;
+}
+
+.ranked-risk-summary span {
+  margin-bottom: 4px;
+  color: #94a3b8;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ranked-risk-summary strong {
+  display: block;
+  margin-bottom: 3px;
+  font-size: 16px;
+}
+
+.ranked-risk-summary small {
+  color: #fbbf24;
+  font-weight: 700;
+}
+
+.ranked-risk-list {
+  display: grid;
+  gap: 10px;
+}
+
+.ranked-risk-row {
+  display: grid;
+  grid-template-columns:
+    44px
+    minmax(145px, 1.4fr)
+    minmax(140px, 2fr)
+    72px
+    92px;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  padding: 13px 14px;
+  border: 1px solid rgba(148, 163, 184, 0.11);
+  border-radius: 14px;
+  background: rgba(7, 17, 31, 0.23);
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease;
+}
+
+.ranked-risk-row:first-child {
+  border-color: rgba(245, 158, 11, 0.3);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(249, 115, 22, 0.09),
+      rgba(7, 17, 31, 0.24)
+    );
+}
+
+.ranked-risk-row:hover {
+  border-color: rgba(56, 189, 248, 0.22);
+  background: rgba(56, 189, 248, 0.04);
+}
+
+.ranked-risk-rank {
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.ranked-risk-neighborhood {
+  min-width: 0;
+}
+
+.ranked-risk-neighborhood strong,
+.ranked-risk-neighborhood span {
+  display: block;
+}
+
+.ranked-risk-neighborhood strong {
+  overflow: hidden;
+  color: #f8fafc;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+}
+
+.ranked-risk-neighborhood span {
+  margin-top: 3px;
+  color: #64748b;
+  font-size: 10px;
+}
+
+.ranked-risk-bar-wrap {
+  min-width: 0;
+}
+
+.ranked-risk-bar-track {
+  width: 100%;
+  height: 9px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(51, 65, 85, 0.82);
+}
+
+.ranked-risk-bar-fill {
+  height: 100%;
+  border-radius: inherit;
+  transition: width 0.45s ease;
+}
+
+.ranked-risk-score {
+  text-align: right;
+}
+
+.ranked-risk-score strong {
+  font-size: 15px;
+}
+
+.ranked-risk-score span {
+  margin-left: 2px;
+  color: #64748b;
+  font-size: 10px;
+}
+
+.ranked-risk-level {
+  justify-self: end;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 76px;
+  padding: 6px 8px;
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+.ranked-risk-note {
+  margin: 14px 0 0 !important;
+  color: #7f93aa !important;
+  font-size: 11px !important;
+}
+
+
 /* -------------------------------------------------------
    Tablet
 ------------------------------------------------------- */
@@ -659,6 +944,16 @@ a {
 
   .subtitle {
     font-size: 16px;
+  }
+
+  .ranked-risk-row {
+    grid-template-columns:
+      40px
+      minmax(130px, 1.3fr)
+      minmax(110px, 1.6fr)
+      68px
+      84px;
+    gap: 10px;
   }
 }
 
@@ -745,6 +1040,45 @@ a {
 
   .leaflet-container {
     min-height: 320px;
+  }
+
+  .urgent-alert {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 12px;
+    padding: 18px;
+  }
+
+  .urgent-alert-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+
+  .urgent-alert-content {
+    padding-right: 28px;
+  }
+
+  .urgent-alert h2 {
+    font-size: 18px;
+  }
+
+  .ranked-risk-heading {
+    display: grid;
+    gap: 14px;
+  }
+
+  .ranked-risk-summary {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .ranked-risk-list {
+    overflow-x: auto;
+    padding-bottom: 5px;
+  }
+
+  .ranked-risk-row {
+    min-width: 650px;
   }
 }
 
