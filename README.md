@@ -1,4 +1,4 @@
-# Heat Triage
+# Heat Triage (Note: Backend may need a short wake-up on first access.)
 
 **Heat Triage** is a heat-health decision-support dashboard designed to help cities understand extreme-heat conditions and identify where intervention should be prioritized first.
 
